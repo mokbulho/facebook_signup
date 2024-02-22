@@ -31,8 +31,6 @@ time.sleep(wait_time)
 password = driver.find_element(By.XPATH,'//input[@name="reg_passwd__"]').send_keys("demo_password")
 time.sleep(wait_time)
 
-
-
 month = driver.find_element(By.ID,"month")
 day = driver.find_element(By.ID,"day")
 year = driver.find_element(By.ID,"year")
@@ -40,8 +38,6 @@ year = driver.find_element(By.ID,"year")
 monthDD = Select(month)
 dayDD = Select(day)
 yearDD = Select(year)
-
-
 
 firstwebelement = monthDD.first_selected_option
 print("First web element is ",firstwebelement.text)
@@ -79,7 +75,6 @@ for ele in listDD:
         ele.click()
         time.sleep(wait_time)
         break
-
 
 driver.find_element(By.XPATH,"//label[text()='Male']").click()
 driver.find_element(By.XPATH,"//button[text()='Sign Up']").click()
