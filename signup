@@ -1,0 +1,91 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.select import Select
+
+chrome_options = Options()
+chrome_options.add_experimental_option("detach", True)
+driver = webdriver.Chrome(options= chrome_options)
+
+driver.maximize_window()
+print(type(driver))
+driver.get("https://www.facebook.com/")
+driver.implicitly_wait(10)
+
+newAccount = driver.find_element(By.PARTIAL_LINK_TEXT,"Create")
+newAccount = driver.find_element(By.XPATH,"//a[contains(text(),'Create')]")
+newAccount.click()
+
+wait_time = 2
+
+first_name = driver.find_element(By.XPATH,'//input[@name="firstname"]').send_keys("Mokbul")
+time.sleep(wait_time)
+last_name = driver.find_element(By.XPATH,'//input[@name="lastname"]').send_keys("Hossain")
+time.sleep(wait_time)
+
+email_address = driver.find_element(By.XPATH,'//input[@name="reg_email__"]').send_keys("SuperDemo@gmail.com")
+time.sleep(wait_time)
+confirm_email_address = driver.find_element(By.XPATH,'//input[@name="reg_email_confirmation__"]').send_keys("SuperDemo@gmail.com")
+time.sleep(wait_time)
+password = driver.find_element(By.XPATH,'//input[@name="reg_passwd__"]').send_keys("demo_password")
+time.sleep(wait_time)
+
+
+
+month = driver.find_element(By.ID,"month")
+day = driver.find_element(By.ID,"day")
+year = driver.find_element(By.ID,"year")
+
+monthDD = Select(month)
+dayDD = Select(day)
+yearDD = Select(year)
+
+
+
+firstwebelement = monthDD.first_selected_option
+print("First web element is ",firstwebelement.text)
+
+firstwebelement = dayDD.first_selected_option
+print("First web element is ",firstwebelement.text)
+
+firstwebelement = yearDD.first_selected_option
+print("First web element is ",firstwebelement.text)
+
+listDD = monthDD.options
+print(len(listDD))
+assert 12==len(listDD)
+for ele in listDD:
+    print("Value is ",ele.text)
+    if ele.text=="Nov":
+        ele.click()
+        time.sleep(wait_time)
+        break
+
+listDD = dayDD.options
+print(len(listDD))
+for ele in listDD:
+    print("Value is ",ele.text)
+    if ele.text=="18":
+        ele.click()
+        time.sleep(wait_time)
+        break
+
+listDD = yearDD.options
+print(len(listDD))
+for ele in listDD:
+    print("Value is ",ele.text)
+    if ele.text=="1980":
+        ele.click()
+        time.sleep(wait_time)
+        break
+
+
+driver.find_element(By.XPATH,"//label[text()='Male']").click()
+driver.find_element(By.XPATH,"//button[text()='Sign Up']").click()
+
+# monthDD.select_by_index(3)
+# time.sleep(2)
+# monthDD.select_by_value("6")
+# time.sleep(2)
+# monthDD.select_by_visible_text("Aug")
